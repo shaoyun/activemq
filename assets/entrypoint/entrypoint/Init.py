@@ -246,6 +246,8 @@ class Init():
         self.replace_all(ACTIVEMQ_CONF + "/log4j.properties", "\$\{activemq\.base\}\/data\/", "/var/log/activemq/")
         self.replace_all(ACTIVEMQ_HOME + "/bin/linux-x86-64/wrapper.conf" ,"wrapper\.logfile=%ACTIVEMQ_DATA%\/wrapper\.log", "wrapper.logfile=/var/log/activemq/wrapper.log")
 
+        self.replace_all(ACTIVEMQ_CONF + "/jetty.xml", "<property name=\"host\" value=\"127.0.0.1\"\/>", "<property name=\"host\" value=\"0.0.0.0\"\/>")
+
 
     def setting_all(self):
         # We look if we must remove default account
