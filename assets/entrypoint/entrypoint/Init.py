@@ -150,7 +150,7 @@ class Init():
         if name is None or name == "":
             raise KeyError("You must set the name")
 
-        if messageLimit is None or messageLimit < 0:
+        if messageLimit is None or int(messageLimit) < 0:
             raise KeyError("You must set the messageLimit")
 
         if storageUsage is None or storageUsage == "":
@@ -159,10 +159,10 @@ class Init():
         if tempUsage is None or tempUsage == "":
             raise KeyError("You must set the tempStorage")
 
-        if maxConnection is None or maxConnection < 0:
+        if maxConnection is None or int(maxConnection) < 0:
             raise KeyError("You must set the maxConnection")
 
-        if frameSize is None or frameSize < 0:
+        if frameSize is None or int(frameSize) < 0:
             raise KeyError("You must set the frameSize")
 
         self.replace_all(ACTIVEMQ_CONF + "/activemq.xml", 'brokerName="[^"]*"', 'brokerName="' + name + '"')
@@ -221,10 +221,10 @@ class Init():
 
     def do_setting_activemq_wrapper(self, minMemoryInMB, maxMemoryInMb):
 
-        if minMemoryInMB is None or minMemoryInMB < 0:
+        if minMemoryInMB is None or int(minMemoryInMB) < 0:
             raise KeyError("You must set the minMemory")
 
-        if maxMemoryInMb is None or maxMemoryInMb < 0:
+        if maxMemoryInMb is None or int(maxMemoryInMb) < 0:
             raise KeyError("You must set the maxMemory")
 
         self.replace_all(ACTIVEMQ_HOME + "/bin/linux-x86-64/wrapper.conf", "#?wrapper\.java\.initmemory=\d+", 'wrapper.java.initmemory=' + str(minMemoryInMB))

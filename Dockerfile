@@ -1,15 +1,18 @@
-FROM webcenter/openjdk-jre:8
-MAINTAINER Sebastien LANGOUREAUX <linuxworkgroup@hotmail.com>
+FROM ubuntu:20.04
 
 ENV ACTIVEMQ_CONFIG_DIR /opt/activemq/conf.tmp
 ENV ACTIVEMQ_DATA_DIR /data/activemq
 
 # Update distro and install some packages
 RUN apt-get update && \
-    apt-get install --no-install-recommends -y python-testtools python-nose python-pip vim curl supervisor logrotate locales  && \
+    apt-get upgrade -y && \
+    apt-get install openjdk-8-jre-headless -y && \
+    apt-get install locales -y && \
+    apt-get install --no-install-recommends -y python-nose python3-pip vim curl supervisor logrotate  && \
     update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
     locale-gen en_US.UTF-8 && \
     dpkg-reconfigure locales && \
+    apt-get clean all && \
     rm -rf /var/lib/apt/lists/*
 
 # Install stompy
